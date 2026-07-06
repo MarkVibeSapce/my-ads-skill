@@ -39,8 +39,10 @@
    - `pages_messaging`, `pages_read_user_content` (อ่าน inbox — ใช้ตอน monthly)
 4. กด **Generate Access Token** → copy token ที่ได้
 
-> ⚠️ Token จาก Explorer อายุสั้น (~1–2 ชม.) — เหมาะลองก่อน
-> อยากได้ token ยาว (60 วัน) → บอกผู้ช่วย "ช่วยแลก token เป็นแบบ 60 วัน" (ใช้ endpoint `oauth/access_token`)
+> 🔑 **สำคัญ — ทำ token ยาว 60 วันเลย** (ไม่งั้นเจ็บซ้ำ):
+> Token จาก Explorer อายุสั้น **~1–2 ชม.** → ใช้ๆ อยู่ตายกลางคัน
+> **บอกผู้ช่วย: "ช่วยแลก token เป็นแบบ 60 วันให้หน่อย"** → ผู้ช่วยแลกให้ (endpoint `oauth/access_token`) แล้วเอาตัวยาวไปใส่ .env
+> ครบ 60 วันค่อยทำใหม่ · ถ้าวันไหน "แอดดึงข้อมูลไม่ได้" ให้เดาไว้ก่อนว่า **token หมดอายุ → ทำใหม่**
 
 ### ทาง B: ให้ผู้ช่วยพาทำทีละขั้น
 พิมพ์: **"ช่วยพาทำ Meta App + Token ทีละขั้น"** → ผู้ช่วยไล่ให้ทีละหน้าจอ
@@ -58,28 +60,22 @@ FB_ACCESS_TOKEN_PAGE=วางtokenตรงนี้
 
 > ทั้งสองใช้ token เดียวกันก็ได้ ถ้า token มี permission ครบทั้งงานแอด+เพจ
 
-**โหลด .env เข้า environment ก่อนรัน:**
-```bash
-export $(grep -v '^#' .env | xargs)
-```
+**เสร็จแล้วใช้ได้เลย** — skill อ่าน `.env` จากในโฟลเดอร์เอง ไม่ต้องพิมพ์คำสั่งอะไรเพิ่ม
+(ถ้าวางไฟล์ผิดที่ ผู้ช่วยจะเตือน "ไม่เจอ token — ทำ .env ก่อน")
 
 > 🔒 **ห้าม** commit `.env` ขึ้น git · ห้ามส่ง token ให้ใคร · token = กุญแจบัญชีโฆษณา
+> (`.gitignore` กัน `.env` ให้แล้ว)
 
 ---
 
 ## Step 4 — ทดสอบว่าต่อติด
 
-พิมพ์กับผู้ช่วย: **"ทดสอบว่าต่อ API ติดมั้ย"** หรือรันเอง:
+พิมพ์กับผู้ช่วย: **"ทดสอบว่าต่อ API ติดมั้ย"** — ผู้ช่วยจะใช้ตัวโหลด `.env` จาก SKILL.md แล้วลองดึงชื่อบัญชี
 
 ```python
-import urllib.request, urllib.parse, json, os
-TOKEN = os.environ["FB_ACCESS_TOKEN_ADS"]
-ACCOUNT_ID = "act_XXXXXXXXXXXX"   # ของคุณ
-API = "https://graph.facebook.com/v21.0"
-
-params = urllib.parse.urlencode({"fields": "name,account_status,currency", "access_token": TOKEN})
-with urllib.request.urlopen(f"{API}/{ACCOUNT_ID}?{params}") as r:
-    print(json.loads(r.read()))
+# (ผู้ช่วยรันให้ — ใช้ TOKEN_ADS ที่โหลดจาก .env ใน SKILL.md)
+r = api_get("act_XXXXXXXXXXXX", {"fields": "name,account_status,currency"})   # ใส่ Account ID ของคุณ
+print(r)
 ```
 
 **ผ่าน** = เห็นชื่อบัญชี + `account_status: 1` (1 = ใช้งานได้)

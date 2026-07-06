@@ -49,11 +49,13 @@ description: |
 
 ## โครงสร้าง Skill
 
-> 🆕 **ติดตั้งครั้งแรก / ยังไม่เคยใช้** → เปิด `README.md` ก่อน (copy skill, กรอก profile, ต่อ token)
+> 🆕 **นักเรียนไม่มีพื้นฐาน** → เปิด `QUICKSTART.md` (5 นาที ไม่มีโค้ด)
+> 📖 **อยากติดตั้งละเอียด / ต่อ API** → `README.md`
 
 ```
 my-ads/
-├── README.md         ← เริ่มที่นี่ (ติดตั้ง + ต่อ API จริง)
+├── QUICKSTART.md     ← นักเรียนเริ่มที่นี่ (ไม่มีโค้ด · พูดกับ Claude)
+├── README.md         ← ติดตั้งละเอียด + ต่อ API จริง
 ├── SKILL.md          ← ไฟล์นี้ — index + วิธีใช้ + กฎความปลอดภัย
 ├── BRAND_PROFILE.md  ← ★ หัวใจ — ธุรกิจคุณ + KPI + Persona + "สมอง" จำ session
 ├── SETUP.md          ← ครั้งแรก: ทำ Token + .env + ทดสอบ API
@@ -119,9 +121,25 @@ my-ads/
 ```python
 import urllib.request, urllib.parse, json, os
 
-# อ่าน token จาก .env (ทำใน SETUP.md) — ห้าม hardcode token ในโค้ด
-TOKEN_ADS  = os.environ["FB_ACCESS_TOKEN_ADS"]    # งานแอด
-TOKEN_PAGE = os.environ["FB_ACCESS_TOKEN_PAGE"]   # งานเพจ (inbox/posts)
+# อ่าน token จาก .env ในโฟลเดอร์ skill โดยตรง — ไม่ต้อง export ใน shell
+# (ทำ .env ตาม SETUP.md · ห้าม hardcode token ในโค้ด)
+def load_env():
+    env = {}
+    here = os.path.dirname(os.path.abspath(__file__)) if "__file__" in globals() else "."
+    p = os.path.join(here, ".env")
+    if os.path.exists(p):
+        for line in open(p, encoding="utf-8"):
+            line = line.strip()
+            if line and not line.startswith("#") and "=" in line:
+                k, v = line.split("=", 1)
+                env[k.strip()] = v.strip()
+    return env
+
+_ENV = load_env()
+TOKEN_ADS  = _ENV.get("FB_ACCESS_TOKEN_ADS")  or os.environ.get("FB_ACCESS_TOKEN_ADS")
+TOKEN_PAGE = _ENV.get("FB_ACCESS_TOKEN_PAGE") or os.environ.get("FB_ACCESS_TOKEN_PAGE")
+if not TOKEN_ADS:
+    raise SystemExit("❌ ไม่เจอ token — ทำไฟล์ .env ก่อน (ดู SETUP.md) แล้วลองใหม่")
 API = "https://graph.facebook.com/v21.0"
 
 def api_get(path, params, token=None):
