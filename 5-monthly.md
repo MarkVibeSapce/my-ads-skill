@@ -140,27 +140,32 @@ buckets = {
 
 ---
 
-## Step 7 — ออก PDF report (เก็บ/ส่งหุ้นส่วน/แนบขอสินเชื่อ)
+## Step 7 — ออกรายงานส่งหัวหน้า (PDF + PPTX + HTML)
 
-> ใช้ `report-monthly.html` — หน้ารายงาน A4 พร้อมพิมพ์ (light mode)
-> ไม่ใช้ PPTX/ReportLab — Thai combining marks ทับกัน · Chrome headless ชัวร์กว่า
+> ใช้ **`6-report.md`** — generator `report/gen_report.py` ดึงตัวเลขเดือนนี้ + เติมบทวิเคราะห์ → ออก 3 รูปแบบ
+> เลข funnel / questions / เลดจริง ที่ได้จาก Step 2–5 เอาไปเติมในรายงานได้เลย
 
-**ทางง่าย (นักเรียนทำเอง):**
-1. เปิด `report-monthly.html` ในเบราว์เซอร์
-2. กดปุ่ม **"พิมพ์ / บันทึก PDF"** มุมบน → เลือก "Save as PDF" → A4 เสร็จ
-
-**ทาง command line (ให้ผู้ช่วยทำ):**
 ```bash
-# เติมเลขจริงลง report-monthly.html ก่อน (แทนค่า mockup)
-"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
-  --headless --disable-gpu --no-pdf-header-footer \
-  --print-to-pdf="รายงานแอด-[เดือน].pdf" \
-  "report-monthly.html"
+cd report
+python3 gen_report.py --period monthly --fetch     # ดึงเลขเดือนที่แล้ว
+# Claude เติม exec/funnel/questions/goods/improves/next_plan ใน report_data.json
+python3 gen_report.py --period monthly --render --out all
 ```
+> ดูตัวอย่างก่อนได้: `python3 gen_report.py --period monthly --mock --out all`
+> รายละเอียดครบใน `6-report.md`
 
-**อัปเดตเลขในรายงาน:** แก้ค่าใน `report-monthly.html` (แชท/CPR/funnel/persona/ถามอะไร/สิ่งที่ดี-ต้องปรับ) ให้ตรงข้อมูลเดือนนั้น — หรือบอกผู้ช่วย "เติมเลขเดือนนี้ลง report" แล้วดึงจาก Step 1–5 มาใส่ให้
+**report ใช้ทำอะไร:** ส่งหัวหน้า · ขึ้นจอประชุม (PPTX) · แนบขอสินเชื่อ — เล่าจริง > เลขสวย
 
-**report ใช้ทำอะไร:** เจ้าของเก็บดูเอง · ส่งหุ้นส่วน · แนบขอสินเชื่อธนาคาร — **ไม่ใช่ส่งลูกค้า**
+---
+
+## ➡️ ต่อไปทำอะไร (เสนอให้นักเรียนเลือก — พิมพ์เลข)
+```
+✅ สรุปเดือน + inbox เสร็จ · ต่อไป?
+  1. ออกรายงานส่งหัวหน้า PDF/PPTX/HTML → 6-report.md
+  2. inbox เจอแชทผีเยอะ → เปิด/ปรับโหมดกรอง → GHOST_FILTER.md
+  3. วางแผนเดือนหน้า (persona/งบใหม่) → 4-planning.md
+  4. อัปเดต baseline + สิ่งที่เรียนรู้ลง BRAND_PROFILE.md ข้อ 6
+```
 
 ---
 

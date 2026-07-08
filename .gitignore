@@ -2,3 +2,8 @@
 *.pdf
 .DS_Store
 __pycache__/
+
+# report outputs (มีข้อมูลลูกค้าจริง — ไม่ commit)
+report/report_data.json
+report/รายงานแอด-*.html
+report/รายงานแอด-*.pptx

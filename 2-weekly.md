@@ -124,4 +124,16 @@ change = pct(cpr_now, cpr_prev)
 
 ---
 
+## ➡️ ต่อไปทำอะไร (เสนอให้นักเรียนเลือก — พิมพ์เลข)
+```
+✅ ดูผลสัปดาห์นี้เสร็จ · ต่อไป?
+  1. CPR แพงขึ้น/ยอดตก → ปรับแอด → 3-optimize.md
+  2. แชทเยอะแต่ไม่ค่อยคุยต่อ → เช็คแชทผี → GHOST_FILTER.md
+  3. ผลดี อยากขยาย → เพิ่ม persona/ad set → 4-planning.md → 1-setup.md
+  4. ทำรายงานส่งหัวหน้า (PDF/PPTX/HTML) → 6-report.md
+  5. จด baseline สัปดาห์นี้ลง BRAND_PROFILE.md ข้อ 6
+```
+
+---
+
 *Module 2: ดูผลรายสัปดาห์ — my-ads*

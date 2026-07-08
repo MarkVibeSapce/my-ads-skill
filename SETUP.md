@@ -14,6 +14,28 @@
 
 ---
 
+## Step 0 — เตรียมเครื่อง (ติดตั้งอัตโนมัติ) · ทำครั้งเดียว
+
+> skill รัน **Python** เพื่อยิง API (ใช้ตั้งแต่สร้างแอด ไม่ใช่แค่รายงาน)
+> **นักเรียนไม่ต้องทำเอง** — พิมพ์กับผู้ช่วย: **"ช่วยเตรียมเครื่องให้ใช้ my-ads ได้"**
+
+ผู้ช่วยจะรัน bootstrap ให้ตาม OS — ตรวจ+ติดตั้งของที่ขาดเองอัตโนมัติ:
+```
+Mac / Linux :  bash report/setup_env.sh
+Windows     :  powershell -ExecutionPolicy Bypass -File report\setup_env.ps1
+```
+
+สคริปต์จัดการให้ครบ:
+| ของ | ใช้ทำอะไร | ไม่มี → ทำอะไร |
+|-----|-----------|---------------|
+| **Python 3** | ยิง API ทุก module | ติดตั้งเอง (Mac brew · Linux apt · Win winget) |
+| **python-pptx** | ทำ PPTX (Module 6) | `pip install python-pptx` อัตโนมัติ |
+| **Chrome / Edge** | ทำ PDF (Module 6) | Windows มี Edge อยู่แล้ว · ไม่มี → เปิด HTML พิมพ์เอง |
+
+> Windows ถ้าเพิ่งติดตั้ง Python ผ่าน winget → ปิด PowerShell เปิดใหม่ 1 ครั้งให้ PATH อัปเดต
+
+---
+
 ## Step 1 — หา Ad Account ID + Page ID
 
 **Ad Account ID:**

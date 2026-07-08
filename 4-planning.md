@@ -148,4 +148,14 @@ result = api_get(f"{ACCOUNT_ID}/delivery_estimate", {
 
 ---
 
+## ➡️ ต่อไปทำอะไร (เสนอให้นักเรียนเลือก — พิมพ์เลข)
+```
+✅ วางแผน + ได้ persona/interest แล้ว · ต่อไป?
+  1. สร้างแคมเปญตามแผนนี้ (PAUSED) → 1-setup.md
+  2. บันทึก persona + interest IDs ลง BRAND_PROFILE.md ข้อ 4–5 (ใช้ซ้ำได้)
+  3. (แคมเปญแชท) เตรียมเปิดโหมดกรองแชทผี → GHOST_FILTER.md
+```
+
+---
+
 *Module 4: วางแผนแอด — my-ads*

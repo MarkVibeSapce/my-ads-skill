@@ -31,7 +31,7 @@ cp -r my-ads ~/.claude/skills/
   FB_ACCESS_TOKEN_ADS=...
   FB_ACCESS_TOKEN_PAGE=...
   ```
-- โหลดก่อนใช้: `export $(grep -v '^#' .env | xargs)`
+- ไม่ต้อง export — skill อ่าน `.env` จากในโฟลเดอร์เอง
 - 🔒 ห้าม commit `.env` · ห้ามส่ง token ให้ใคร
 
 ### 4. เริ่มทำงาน
@@ -44,15 +44,17 @@ cp -r my-ads ~/.claude/skills/
 | "ดูผลสัปดาห์นี้" | `2-weekly.md` |
 | "แอดแพง / ปรับแอด" | `3-optimize.md` |
 | "สรุปเดือน / ลูกค้าถามอะไร" | `5-monthly.md` |
-| "แอดโดนแบน / งบหมด" | `EMERGENCY.md` |
+| "ทำรายงานส่งหัวหน้า (PDF/PPTX)" | `6-report.md` |
+| "แชทผี / กรองแชท" | `GHOST_FILTER.md` |
+| "แอดโดนแบน / งบหมด / ไทยเพี้ยน" | `EMERGENCY.md` |
 
 ---
 
 ## ลำดับใช้งานปกติ (loop)
 ```
 เดือนแรก:  4-planning → 1-setup → (หัวหน้าเปิดแอด)
-ทุกสัปดาห์: 2-weekly → (เจอปัญหา) 3-optimize
-สิ้นเดือน:  5-monthly → ออก report PDF → อัปเดต BRAND_PROFILE ข้อ 6
+ทุกสัปดาห์: 2-weekly → (เจอปัญหา) 3-optimize → 6-report (ส่งหัวหน้า)
+สิ้นเดือน:  5-monthly → 6-report (PDF/PPTX) → อัปเดต BRAND_PROFILE ข้อ 6
 ```
 
 ---
@@ -99,8 +101,11 @@ my-ads/
 ├── 2-weekly.md       ← ดูผลสัปดาห์
 ├── 3-optimize.md     ← ปรับแอด
 ├── 4-planning.md     ← วางแผน + persona
-├── 5-monthly.md      ← สรุปเดือน + PDF
-├── EMERGENCY.md      ← วิกฤต
+├── 5-monthly.md      ← สรุปเดือน + inbox
+├── 6-report.md       ← รายงานส่งหัวหน้า (PDF+PPTX+HTML)
+├── GHOST_FILTER.md   ← โหมดกรองแชทผี
+├── EMERGENCY.md      ← วิกฤต (แบน/งบหมด/ไทยเพี้ยน)
+├── report/           ← gen_report.py (ตัวสร้างรายงาน 3 รูปแบบ)
 ├── dashboard-mockup.html
 └── report-monthly.html
 ```
